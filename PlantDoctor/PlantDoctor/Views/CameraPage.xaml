@@ -2,13 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PlantDoctor.CustomControls"
+             xmlns:vm="clr-namespace:PlantDoctor.ViewModels"
              x:Class="PlantDoctor.Views.CameraPage">
+    
+    <ContentPage.BindingContext>
+        <vm:CameraViewModel />
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <local:CameraPreview
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                BackgroundColor="{Binding HealthColor}"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand" />
-            <Button Text="Check" />
-        </StackLayout>
+                HorizontalTextAlignment="Center"
+                Text="{Binding HealthDescription}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+            <Image
+                Grid.Row="1"
+                Source="{Binding Picture}" />
+            <Button
+                Grid.Row="2"
+                Command="{Binding TakePicture}"
+                Text="Take Picture" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
